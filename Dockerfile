@@ -3,7 +3,6 @@ WORKDIR /app
 
 COPY /build/libs/service.jar app.jar
 
-WORKDIR /app/build
-EXPOSE 8080
+EXPOSE 8090
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
