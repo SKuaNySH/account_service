@@ -62,6 +62,12 @@ dependencies {
      */
     implementation ("io.swagger.core.v3:swagger-models:2.2.15")
     implementation ("io.swagger.core.v3:swagger-core:2.2.15")
+
+    /**
+     * Validation
+     */
+    implementation("org.hibernate.validator:hibernate-validator:8.0.1.Final")
+    implementation("org.glassfish:jakarta.el:4.0.2")
 }
 
 tasks.withType<Test> {

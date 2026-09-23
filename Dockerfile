@@ -1,8 +1,9 @@
-FROM openjdk:17-jdk-slim-buster
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
-COPY /build/libs/service.jar build/
+COPY /build/libs/service.jar app.jar
 
 WORKDIR /app/build
 EXPOSE 8080
-ENTRYPOINT java -jar service.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
+

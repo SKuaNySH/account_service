@@ -25,9 +25,9 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidAccountOperationException.class)
-    public ResponseEntity<faang.school.accountservice.dto.Error> handleInvalidOperation(InvalidAccountOperationException e) {
+    public ResponseEntity<Error> handleInvalidOperation(InvalidAccountOperationException e) {
         log.error("Invalid account operation: {}", e.getMessage());
-        faang.school.accountservice.dto.Error error = new faang.school.accountservice.dto.Error("INVALID_OPERATION", e.getMessage());
+        Error error = new Error("INVALID_OPERATION", e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
@@ -66,7 +66,10 @@ public class GlobalExceptionHandler {
                                                                         HttpServletRequest request) {
 
         log.error("Balance not found: {}", ex.getMessage());
-        return build(HttpStatus.NOT_FOUND, "Balance Not Found", ex.getMessage(), request.getRequestURI());
+        return build(HttpStatus.NOT_FOUND,
+                "Balance Not Found",
+                ex.getMessage(),
+                request.getRequestURI());
     }
 
     @ExceptionHandler(AccountNotFoundException.class)
