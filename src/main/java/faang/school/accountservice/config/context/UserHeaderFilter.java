@@ -21,16 +21,28 @@ public class UserHeaderFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest) request;
+        if (isSwaggerRequest(req)) {
+            chain.doFilter(request, response);
+            return;
+        }
         String userId = req.getHeader("x-user-id");
         if (userId != null) {
             userContext.setUserId(Long.parseLong(userId));
         } else {
-            throw new IllegalArgumentException("Missing required header 'x-user-id'. Please include 'x-user-id' header with a valid user ID in your request.");
+            throw new IllegalArgumentException("Missing required header 'x-user-id'. Please include 'x-user-id' header"
+                    + " with a valid user ID in your request.");
         }
         try {
             chain.doFilter(request, response);
         } finally {
             userContext.clear();
         }
+    }
+
+    private boolean isSwaggerRequest(HttpServletRequest request) {
+        String uri = request.getRequestURI();
+
+        return uri.startsWith("/api/swagger-ui/")
+                || uri.startsWith("/api/v3/api-docs");
     }
 }

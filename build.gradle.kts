@@ -60,8 +60,7 @@ dependencies {
     /**
      * Swagger
      */
-    implementation ("io.swagger.core.v3:swagger-models:2.2.15")
-    implementation ("io.swagger.core.v3:swagger-core:2.2.15")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
 
     /**
      * Validation
